@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Logged out{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/registration/logged_out.css' %}">
+<div class="form-group">
+    <div class="container mt-5">
+        <p class="text-center">Logged out!</p>
+        <div class="text-center">
+            <a href="{% url 'login' %}" class="btn btn-primary">Log in again</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

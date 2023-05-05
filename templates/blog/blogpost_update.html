@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/blog/blogpost_update.css' %}">
+<h1>Update Post</h1>
+<form method="POST" class="form-group" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if not object.is_published %}
+    <button class="btn btn-success" type="submit" name="publish">Update and publish</button>
+    <button class="btn btn-secondary" type="submit" name="save_draft">Update a draft</button>
+    {% else %}
+    <button class="btn btn-success" type="submit" name="publish">Update</button>
+    {% endif %}
+</form>
+{% endblock %}

@@ -1,0 +1,49 @@
+.profile-avatar img {
+width: 150px;
+height: 150px;
+object-fit: cover;
+border-radius: 50%;
+}
+
+.nav-tabs {
+margin-top: 30px;
+}
+
+.tab-content .tab-pane {
+padding: 20px;
+}
+
+.tab-content .tab-pane img {
+width: 100%;
+height: 200px;
+object-fit: cover;
+}
+
+.tab-content .tab-pane h5 {
+margin-top: 10px;
+}
+
+.tab-content .tab-pane p {
+margin-top: 5px;
+color: #777;
+}
+
+.post-title {
+font-weight: bold;
+font-size: 18px;
+color: black !important;
+}
+
+.post-description {
+font-size: 14px;
+}
+
+@media (max-width: 576px) {
+.profile-avatar img {
+width: 100px;
+height: 100px;
+}
+.tab-content .tab-pane img {
+height: 150px;
+}
+}

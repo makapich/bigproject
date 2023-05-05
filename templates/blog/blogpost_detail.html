@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="text-align: center;">
+    {% if not object.is_published %}
+    <p style="color: grey; font-size: 2rem;">Draft</p>
+    {% endif %}
+    <h1 style="font-size: 2rem;">{{ object.title }}</h1>
+    <p><img src="{{ object.image.url }}" alt="{{ object.title }}" style="max-width: 50%;" /></p>
+    <p style="font-size: 1.2rem;">{{ object.text }}</p>
+    <p style="color: grey; font-size: 0.8rem;">Created at: {{ object.created_at }}</p>
+</div>
+<div style="text-align: center;">
+    {% if user.is_authenticated and user == object.author %}
+    <a href="{% url 'blogpost_update' username=request.user.username pk=object.pk %}" class="btn btn-primary">Edit</a>
+    {% endif %}
+    <a href="{% url 'comment_create' username=object.author.username pk=object.pk %}" class="btn btn-primary">Comment</a>
+</div>
+<div style="text-align: center; margin-top: 2rem;">
+    <h2>Comments</h2>
+    <div class="comments-container">
+        {% for comment in comments %}
+        <div class="comment" style="border: 1px solid grey; padding: 1rem; margin-bottom: 1rem;">
+            <h4>{{ comment.username }}</h4>
+            <p>{{ comment.text }}</p>
+            <p style="color: grey; font-size: 0.8rem;">Created at: {{ comment.created_at }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% if comments.has_other_pages %}
+<nav aria-label="Comments Pagination" style="text-align: center; margin-top: 2rem;">
+    <ul class="pagination justify-content-center">
+        {% if comments.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">&laquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ comments.previous_page_number }}">Previous</a>
+        </li>
+        {% endif %}
+        <li class="page-item active">
+            <a class="page-link" href="?page={{ comments.number }}">{{ comments.number }}</a>
+        </li>
+        {% if comments.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ comments.next_page_number }}">Next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ comments.paginator.num_pages }}">&raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}

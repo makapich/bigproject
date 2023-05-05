@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Update profile{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/registration/update_profile.css' %}">
+<form method="POST" class="form-group my-custom-class" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_p }}
+    </table>
+    <button type="submit" class="btn btn-success">Update</button>
+</form>
+{% endblock %}
